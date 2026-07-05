@@ -11,6 +11,21 @@ load_dotenv()
 
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 
+DATA_FILE = "users.json"
+
+
+def load_users():
+    if os.path.exists(DATA_FILE):
+        with open(DATA_FILE, "r") as f:
+            return json.load(f)
+    return {}
+
+def save_users(data):
+    with open(DATA_FILE, "w") as f:
+        json.dump(data, f)
+
+users = load_users()
+
 # 👇 Yahan apne favourite members ke IDs baad me aayenge
 FAV_USERS = []
 
@@ -48,4 +63,28 @@ app.add_handler(CommandHandler("fav", fav))
 
 print("Bot Started...")
 
-app.run_polling()
+app.run_polling() 
+from telegram import Update
+from telegram.ext import (
+    Application,
+    CommandHandler,
+    ContextTypes,
+)
+import json
+import os
+DATA_FILE = "users.json"
+
+
+def load_users():
+    if os.path.exists(DATA_FILE):
+        with open(DATA_FILE, "r") as f:
+            return json.load(f)
+    return {}
+
+
+def save_users(data):
+    with open(DATA_FILE, "w") as f:
+        json.dump(data, f)
+
+
+users = load_users()
